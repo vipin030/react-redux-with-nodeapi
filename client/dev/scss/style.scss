@@ -1,0 +1,20 @@
+$primary: #006699;
+
+h2 {
+	color: $primary;
+}
+ul li{
+	cursor:pointer;
+	line-height: 22px;
+}
+.leftContainer{
+	width:350px;
+}
+.leftContainer,.rightContainer{
+	float:left;
+	margin-left:50px;
+	margin-bottom:20px;
+}
+.bottomContainer{
+	clear:both;
+}
