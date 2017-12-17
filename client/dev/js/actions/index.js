@@ -39,11 +39,10 @@ export const createStudentSuccess = (student) => {
 }
 
 export const createStudent = (student) => {
-  alert("student"+JSON.stringify(student));
   return (dispatch) => {
     return Axios.post(apiUrl+'Students', student)
       .then(response => {
-        alert("response data:"+response);
+        console.log("response data:",response);
         dispatch(createStudentSuccess(response.data))
       })
       .catch(error => {
@@ -51,4 +50,11 @@ export const createStudent = (student) => {
         throw(error);
       });
   };
+}
+
+export const setFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    payload: filter
+  }
 }

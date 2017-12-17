@@ -31,10 +31,20 @@ class StudentList extends Component {
     }
 
 }
+const getVisibleStudent = (student,filter) => {
+    switch(filter){
+        case "SHOW_ALL":
+            return student;
+        case "SHOW_ON_AGE":
+            return student.filter(std=>std.age<25);
+        default:
+            throw new Error('Unknown filter: ' + filter)
+    }
+}
 
 function mapStateToProps(state) {
     return {
-        students: state.students
+        students: getVisibleStudent(state.students,state.visibilityFilter)
     };
 }
 
