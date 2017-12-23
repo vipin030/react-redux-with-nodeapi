@@ -8,7 +8,7 @@ ul li{
 	line-height: 22px;
 }
 .leftContainer{
-	width:350px;
+	width:600px;
 }
 .leftContainer,.rightContainer{
 	float:left;
@@ -17,4 +17,28 @@ ul li{
 }
 .bottomContainer{
 	clear:both;
+}
+
+.std-table{
+	width:450px;
+}
+.std-table tr th{
+	height:30px;
+	color:#fff;
+	background: #b5bdc8; /* Old browsers */
+	background: -moz-linear-gradient(top, #b5bdc8 0%, #828c95 36%, #28343b 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #b5bdc8 0%,#828c95 36%,#28343b 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #b5bdc8 0%,#828c95 36%,#28343b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );
+}
+.std-table tr td{
+	height:30px;
+	cursor:pointer;
+	padding-left:3px;
+}
+.std-table tr:nth-child(odd) td{
+	background:#939390
+}
+.std-table tr:nth-child(even) td{
+	background:#fff;
 }

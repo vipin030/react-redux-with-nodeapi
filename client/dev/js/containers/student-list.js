@@ -12,21 +12,32 @@ class StudentList extends Component {
     renderList() {
         return this.props.students.map((student) => {
             return (
-                <li
-                    key={student.no}
+                <tr
+                    key={student.id}
                     onClick={() => this.props.selectStudent(student)}
                 >
-                    {student.name} {student.city}
-                </li>
+                <td>
+                    {student.no}
+                </td>
+                <td>
+                    {student.name}
+                </td>
+                <td>
+                     {student.city}
+                </td>
+            </tr>
             );
         });
     }
 
     render() {
         return (
-            <ul>
+            <div>
+                <table className="std-table">
+                <tr><th>Roll No</th><th>Name</th><th>Age</th></tr>
                 {this.renderList()}
-            </ul>
+                </table>
+            </div>
         );
     }
 

@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import {success, errorMessage} from './alert-action'
 
 const apiUrl = "http://localhost:3000/";
 export const selectStudent = (student) => {
@@ -44,8 +45,34 @@ export const createStudent = (student) => {
       .then(response => {
         console.log("response data:",response);
         dispatch(createStudentSuccess(response.data))
+        dispatch(success('Student has been added'));
       })
       .catch(error => {
+        dispatch(errorMessage(error.message));
+        aler(error)
+        throw(error);
+      });
+  };
+}
+
+export const modifyStudentSuccess = (student) => {
+  return {
+    type: 'STUDENT_UPDATE',
+    payload: student
+  }
+}
+
+export const modifyStudent = (student) => {
+  return (dispatch) => {
+    return Axios.put(apiUrl+'Students/'+student.id, student)
+      .then(response => {
+        console.log("response update data:",response);
+        dispatch(modifyStudentSuccess(response.data))
+        dispatch(success('Student has been updated'));
+        dispatch(selectStudent(""));
+      })
+      .catch(error => {
+        dispatch(errorMessage(error.message));
         aler(error)
         throw(error);
       });

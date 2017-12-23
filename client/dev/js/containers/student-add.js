@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field,reduxForm,reset } from 'redux-form';
-import { createStudent } from '../actions/index';
-import FormErrors from '../components/form-errors';
+import { createStudent, modifyStudent } from '../actions/index';
 
 const required = value => (value ? undefined : 'Required')
 const maxLength = max => value =>
@@ -38,7 +37,17 @@ class StudentAdd extends Component {
     super(props);
   }
   handleFormSubmit(formProps){
-    this.props.createStudent(formProps);
+    console.log(formProps);
+    if(formProps.id){
+      console.log("updation");
+      this.props.modifyStudent(formProps);
+    }
+    else {
+      this.props.createStudent(formProps);
+      console.log("Insertion")
+    }
+    return;
+    //this.props.createStudent(formProps);
   }
 	render(){
 		return(
@@ -82,19 +91,31 @@ class StudentAdd extends Component {
         	<br/>
         	<div>
         	<input type="submit" value="Save" disabled={this.props.submitting} />
+          <button type="button" disabled={this.props.pristine || this.props.submitting} onClick={()=>this.props.dispatch(reset('fieldLevelValidation'))} >
+                    Undo Changes
+          </button>
+          {this.props.alert.message && <span>{this.props.alert.message}</span>}
         	</div>
+
         </form>
 		);
 	}
 }
 
+function mapStateToProps(state) {
+  return {initialValues: state.activeStudent, alert:state.alert}
+}
+
 function matchDispatchToProps(dispatch){
     return {
-    createStudent: (student) => {dispatch(createStudent(student))}
+    createStudent: (student) => {dispatch(createStudent(student))},
+    modifyStudent: (student) => {dispatch(modifyStudent(student))}
   	}
 }
 
-export default connect(null,matchDispatchToProps)(reduxForm({
+export default connect(mapStateToProps,matchDispatchToProps)(reduxForm({
   form: 'fieldLevelValidation', // a unique identifier for this form
   onSubmitSuccess: afterSubmit,
+  enableReinitialize:true,
+  pristine:false,
 })(StudentAdd));
