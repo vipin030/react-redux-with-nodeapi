@@ -34,7 +34,7 @@ class StudentList extends Component {
         return (
             <div>
                 <table className="std-table">
-                <tr><th>Roll No</th><th>Name</th><th>Age</th></tr>
+                <tr><th>Roll No</th><th>Name</th><th>City</th></tr>
                 {this.renderList()}
                 </table>
             </div>
